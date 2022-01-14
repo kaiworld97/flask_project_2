@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Document</title>
+</head>
+<script>
+  function posting() {
+    let file = $('#file')[0].files[0]
+    let form_data = new FormData()
+
+    form_data.append("file_give", file)
+
+    $.ajax({
+        type: "POST",
+        url: "/fileupload",
+        data: form_data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert(response["result"])
+            // 아래처럼 하지 않아도, 백엔드(app.py)에서 바로 판별 함수를 실행한 뒤에
+            // render_template 을 해서 바로 결과 페이지로 넘어가도 됨
+            window.location.href='/result'
+        }
+    });
+  }
+
+  function preview() {
+    let frame = $('#frame');
+    frame.src=URL.createObjectURL(event.target.files[0]);
+    frame.style.display = 'block';
+  }
+
+</script>
+<body>
+  <div class="file-upload">
+    <img style="display: none;" id="frame" src="" width="300px"/>
+    <input type="file" id="file" onchange="preview()">
+    <button onclick="posting()">고양이일까? 강아지일까?</button>
+  </div>
+</body>
+</html>
