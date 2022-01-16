@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Webpage Title -->
+    <title>로그인</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bulma CSS 링크 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        body {
+            margin: 0;
+            background-color: white;
+        }
+
+        .register-form {
+            width: 500px;
+            background-color: #fafafa;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border: none;
+
+        }
+
+        .text-field {
+            font-size: 14px;
+            padding: 10px;
+            border: none;
+            width: 260px;
+            margin-bottom: 10px;
+
+        }
+
+        .button {
+            font-size: 14px;
+            border: none;
+            padding: 10px;
+            width: 290px;
+            background-color: #1BBC9B;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .links {
+            text-align: center;
+        }
+
+        .links a {
+            font-size: 12px;
+            color: #9B9B9B;
+        }
+
+        .login_container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .login_main {
+            margin: auto;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            flex-flow: row;
+            width: 120rem;
+        }
+
+        .login-form {
+            position: relative;
+            width: 500px;
+            background-color: #EEEFF1;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            border: none;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .text-field {
+            font-size: 14px;
+            padding: 10px;
+            border: none;
+            width: 300px;
+            margin-bottom: 10px;
+
+        }
+
+        .button {
+            font-size: 14px;
+            border: none;
+            padding: 10px;
+            width: 290px;
+            background-color: #1BBC9B;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        #fluate_box {
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .fluate > img {
+            max-width: 20px;
+            margin: 10%;
+            height: auto !important;
+
+        }
+
+        #corn_box {
+            top: 348px;
+            left: 370px;
+            text-align: center;
+            position: absolute;
+            font-size: 20px;
+        }
+
+        #blueberry_box {
+            top: 154px;
+            left: 411px;
+            text-align: center;
+            position: absolute;
+            font-size: 20px;
+        }
+
+        #durian_box {
+            top: 185px;
+            right: 414px;
+            text-align: center;
+            position: absolute;
+            font-size: 20px;
+
+        }
+
+        #potato_box {
+            top: 413px;
+            right: 440px;
+            text-align: center;
+            position: absolute;
+            font-size: 20px;
+        }
+
+        #OE_box {
+            bottom: -100px;
+            text-align: center;
+            position: absolute;
+            font-size: 20px;
+            right: 50%;
+        }
+
+        .login_image {
+
+            display: block;
+            margin: auto;
+            border-radius: 20%;
+            overflow: hidden;
+            width: 90px;
+            height: 90px;
+        }
+    </style>
+
+    <script>
+        function login() {
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {username_give: $('#userid').val(), password_give: $('#userpw').val()},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
+                        // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
+                        $.cookie('mytoken', response['token']);
+
+                        alert('로그인 완료!')
+                        window.location.href = '/'
+                    } else {
+                        // 로그인이 안되면 에러메시지를 띄웁니다.
+                        alert(response['msg'])
+                    }
+                }
+            })
+        }
+
+        function register() {
+            $.ajax({
+                type: "POST",
+                url: "/api/register",
+                data: {
+                    id_give: $('#userid1').val(),
+                    pw_give: $('#userpw1').val(),
+                    nickname_give: $('#usernick').val()
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('회원가입이 완료되었습니다.')
+                        document.getElementById('login-form').classList.remove('hidden')
+                        document.getElementById('register-form').classList.add('hidden')
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            })
+        }
+
+        function regi() {
+            document.getElementById('login-form').classList.add('hidden')
+            document.getElementById('register-form').classList.remove('hidden')
+        }
+    </script>
+</head>
+<body>
+<div class="login_container">
+    <div class="login_main">
+        <div id="login-form" class="login-form">
+            <div class="section has-text-centered">
+                <p class="title">𝓬𝓻𝓸𝓹𝓰𝓻𝓪𝓶</p>
+                <div class="container" style="width:70%">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" for="userid">ID</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" id="userid" aria-describedby="emailHelp"
+                                           placeholder="ID">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" for="userpw">PW</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="password" class="input" id="userpw" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button is-primary" onclick="login()">로그인</button>
+                    <button class="button is-primary" onclick="regi()">회원가입</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="register-form" class="register-form hidden">
+            <div class="section has-text-centered">
+                <h1 class="title">회원가입</h1>
+                <div class="container" style="width:70%">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" for="userid1">ID</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" id="userid1" aria-describedby="emailHelp"
+                                           placeholder="ID">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" for="userpw1">PW</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="password" class="input" id="userpw1" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label" for="usernick">NICKNAME</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" class="input" id="usernick" placeholder="My Nickname">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button is-primary" onclick="register()">회원가입</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="blueberry_box">
+            <img id="blueberry" class="login_image" src=../static/img/blue_berry.png>
+        </div>
+        <div id="durian_box">
+            <img id="durian" class="login_image" src=../static/img/durian.png>
+        </div>
+        <div id="potato_box">
+            <img id="potato" class="login_image" src=../static/img/Potato.png>
+        </div>
+        <div id="corn_box">
+            <img id="corn" class="login_image" src=../static/img/corn.png>
+        </div>
+        <div id="OE_box">
+            <img id="OE" class="login_image" src=../static/img/OE.png>
+        </div>
+    </div>
+</div>
+</body>
+</html>

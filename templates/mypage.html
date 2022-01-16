@@ -1,0 +1,432 @@
+{% extends "base.html"  %}
+{% block content %}
+{% set i_img = user.img %}
+{% set i_id = user.id %}
+{% set i_nick = user.nick %}
+{% set mypage_user_nick = mypage_user.nick %}
+{% set mypage_user_id = mypage_user.id %}
+{% set mypage_user_img = mypage_user.img %}
+mypage_user
+<div id="Mypage-container">
+    <div id="Mypage-main">
+        <header id="Mypage-header">
+            <div id="Mypage-profile-box">
+                <div id="Mypage-profile">
+                    <!--                    프로필 이미지 불러올것-->
+                    {% if user.img == 'x' or user.img == None %}
+                    <img class="Mypage-profile-photo" src="/static/img/12344.gif">
+                    {% else %}
+                    <img class="Mypage-profile-photo" src="data:image/png;base64, {{ mypage_user.img }}">
+                    {% endif %}
+                </div>
+            </div>
+            <section id="Mypage-section">
+                <div id="Mypage-section-top">
+                    <div id="Mypage-text">{{ mypage_user_nick }}</div>
+                    <div id="Mypage-profile-edit-box">
+                        프로필 편집
+                    </div>
+                    <img onclick="update_user_dialog()" style=" width: 24px;height: 24px; margin-left: 10px; " src="../static/img/setting.png">
+                </div>
+                <div id="Mypage-section-middle">
+                    <div class="Mypage-section-middle-text">
+                        <span>게시물</span>
+                        <span class="strong mypagespan">{{ mypage_user.feed_count }}</span>
+                    </div>
+                    <div class="Mypage-section-middle-text">
+                        <span>팔로워</span>
+                        <span class="strong mypagespan">2022</span>
+                    </div>
+                    <div class="Mypage-section-middle-text">
+                        <span>팔로잉</span>
+                        <span class="strong mypagespan">2022</span>
+                    </div>
+                </div>
+                <div id="Mypage-section-bottom">
+                    <span style="font-weight: 600;">{{ mypage_user_nick }}</span><br>
+                    <span>{{ mypage_user_id }}</span>
+                </div>
+            </section>
+        </header>
+        <div id="Mypage-state-bar" role="tablist">
+            <a id="tab1" aria-selected="true" aria-controls="Mypage-panel1" class="Mypage-grid-box-active" role="tab"
+               tabindex="0">
+                <span class="Mypage-grid-box-box">
+                        <img class="Mypage-aria-label" src="../static/img/grid.png">
+                    <span style="margin-left: 6px; cursor: pointer; letter-spacing: 1px;
+    text-align: center;">피드</span>
+
+                </span>
+            </a>
+            <a id="tab2" aria-selected="false" aria-controls="Mypage-panel2" role="tab" tabindex="0" class="">
+                <span class="Mypage-grid-box-box">
+                        <img class="Mypage-aria-label" src="../static/img/grid.png">
+                    <span style="margin-left: 6px; cursor: pointer; letter-spacing: 1px;
+    text-align: center;">래시피 피드</span>
+
+                </span>
+            </a>
+            <a id="tab3" aria-selected="false" aria-controls="Mypage-panel3" role="tab" tabindex="0" class="">
+                <span class="Mypage-grid-box-box">
+                        <img class="Mypage-aria-label" src="../static/img/grid.png">
+                    <span style="margin-left: 6px; cursor: pointer; letter-spacing: 1px;
+    text-align: center;">좋아요 한 피드</span>
+
+                </span>
+            </a>
+        </div>
+        <div>
+            <div id="Mypage-panel1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false" class="panel">
+                {% for row in feedrows %}
+                <div class="img-wrapper">
+                    {% set count = [1] %}
+                    {% for ro in row %}
+                    {% set feedimg = ro.img %}
+                    {% set id = ro.id %}
+                    {% set feedid = ro._id %}
+                    {% set date = ro.date %}
+                    {% if count|length % 3 == 0 %}
+                    <div>
+                        <a onclick="mypageimgopen('{{ feedid }}')">
+                            <div>
+                                <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
+                            </div>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="margin-right-div">
+                        <a onclick="mypageimgopen('{{ feedid }}')">
+                            <div>
+                                <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% set __ = count.append(1) %}
+
+
+
+
+
+                    {% endfor %}
+
+                    {% if (count|length - 1) % 3 != 0 %}
+                    {% set d = 3 - ((count|length - 1) % 3) %}
+                    {% if d == 1 %}
+                    <div>
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="margin-right-div">
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+
+                {% endfor %}
+            </div>
+            <div id="Mypage-panel2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" class="">
+                {% for row in reciperows %}
+                <div class="img-wrapper">
+                    {% set count = [1] %}
+                    {% for ro in row %}
+                    {% set feedimg = ro.img %}
+                    {% set id = ro.id %}
+                    {% set feedid = ro._id %}
+                    {% set date = ro.date %}
+                    {% if count|length % 3 == 0 %}
+                    <div>
+                        <a href="/feed/{{ id }}_{{ date }}">
+                            <div>
+                                <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
+                            </div>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="margin-right-div">
+                        <a href="/feed/{{ id }}_{{ date }}">
+                            <div>
+                                <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% set __ = count.append(1) %}
+                    {% endfor %}
+
+                    {% if (count|length - 1) % 3 != 0 %}
+                    {% set d = 3 - ((count|length - 1) % 3) %}
+                    {% if d == 1 %}
+                    <div>
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="margin-right-div">
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <div id="Mypage-panel3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" class="">
+                {% for row in likerows %}
+                <div class="img-wrapper">
+                    {% set count = [1] %}
+                    {% for ro in row %}
+                    {% set feedimg = ro.img %}
+                    {% set id = ro.id %}
+                    {% set feedid = ro._id %}
+                    {% set date = ro.date %}
+                    {% if count|length % 3 == 0 %}
+                    <div>
+                        <a href="/feed/{{ id }}_{{ date }}">
+                            <div>
+                                <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
+                            </div>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="margin-right-div">
+                        <a href="/feed/{{ id }}_{{ date }}">
+                            <div>
+                                <img src="data:image/png;base64, {{ feedimg }}" class="mypageimg">
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% set __ = count.append(1) %}
+                    {% endfor %}
+
+                    {% if (count|length - 1) % 3 != 0 %}
+                    {% set d = 3 - ((count|length - 1) % 3) %}
+                    {% if d == 1 %}
+                    <div>
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="margin-right-div">
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div class="mypagediv"></div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% for row in feedrows %}
+        {% for ro in row %}
+        {% set feed_img = ro.img %}
+        {% set profile_img = ro.write_user.img %}
+        {% set id = ro.id %}
+        {% set feed_id = ro._id %}
+        {% set nickname = ro.write_user.nick %}
+        {% set content = ro.content %}
+        {% set comments = ro.comments %}
+        {% set comment_profile_img = ro.comments.img %}
+        {% set i_like_feed = user.like_feed %}
+        {% set like_this = ro.like_this %}
+        {% set like = ro.like_count %}
+        {% set time = ro.time %}
+                        <dialog id="{{ feed_id }}_feed_dialog" class="this-dialog">
+                    <div id="container_wrap" class="content_container">
+                        <!-- 피드사진 -->
+                        <div class="feed_pic">
+                            <div class="width_100">
+                                <img class="feed-img" src="data:image/png;base64, {{ feed_img }}" alt="">
+                            </div>
+                        </div>
+                        <!-- 피드내용 -->
+                        <div id="dl_write_part" class="side">
+                            <!-- 헤더부분 -->
+                            <div class="wf_user_info">
+                                <div class="wf_user_profile">
+                                    {% if user.img == 'x' or user.img == None %}
+                                    <img class="user_img" src="/static/img/12344.gif" alt="">
+                                    {% else %}
+                                    <img class="user_img" src="data:image/png;base64, {{ mypage_user_img}}"/>
+                                    {% endif %}
+                                </div>
+                                <div class="user_id">
+                                    <a href="/mypage/{{ id }}">
+                                        <div>
+                                            <span class="user_name">{{ nickname }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="{{ feed_id }}_close_btn" class="close_btn" onclick="dialog_close_btn(`{{ feed_id }}`)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        <div class="dl_comment_box">
+                            <div class="feed_content">
+                                    <span>
+                                        {{ content }}
+                                    </span>
+                            </div>
+                            <div class="comment-box">
+                                <!--여기에 댓글 추가-->
+                                {% for comment in comments %}
+                                <div class="comment_wrapper">
+                                        {% if comment.img == 'x' or comment.img == None %}
+                                        <img class="comment_img" src="/static/img/12344.gif" alt="">
+                                        {% else %}
+                                        <img class="comment_img" src="data:image/png;base64, {{ comment.img }}">
+                                        {% endif %}
+                                        <div>
+                                            <b>{{ comment.nick }}</b>
+                                            <b id="{{ comment.comment_id }}_comment1" class="lighter" onclick="comment_dialog_open1(`{{ comment.comment_id }}`)">{{ comment.comment }}</b>
+                                        </div>
+                                        <div>
+                                            <input id="{{ comment.comment_id }}_input1" class="hidden" >
+                                            <button id="{{ comment.comment_id }}_ok1"
+                                                    onclick="comment_update1(`{{ comment.comment_id }}`)" class="hidden">확인</button>
+                                            <button id="{{ comment.comment_id }}_cancel1"
+                                                    onclick="comment_update_cancel1(`{{ comment.comment_id }}`)" class="hidden">취소</button>
+                                            <dialog id="{{ comment.comment_id }}_comment-dialog1" class="dialog">
+                                                <form method="dialog">
+                                                    <button id="{{ comment.comment_id }}_update1" onclick="comment_update_btn1(`{{ comment.comment_id }}`)" style="padding-top: 5%" >수정</button>
+                                                    <hr>
+                                                    <button id="{{ comment.comment_id }}_delete1" onclick="button_event(`{{ comment.comment_id }}`);">삭제</button>
+                                                    <hr>
+                                                    <button value="cancel" style="padding-bottom: 5%">취소</button>
+                                                </form>
+                                            </dialog>
+                                        </div>
+
+                                        <div class="feed-time" style="margin-left: -16%;     margin-bottom: 5%;">
+                                            {{ comment.time }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- 푸터부분 -->
+                            <div class="footer">
+                                <!-- 좋아요아이콘 -->
+                                <div class="feed-icons-wrapper flex">
+
+                                    {% if like_this == True %}
+                                    <div class="heart_container" id="{{ feed_id }}_heart1"
+                                         onclick="like(this, '{{ i_id }}')">
+                                        <div class="heart-icon"></div>
+                                    </div>
+                                    <!--                               <img class="feed-icon" onclick="like(this)" src="/static/img/like@4x.png"-->
+                                    <!--                                 id="{{ feed_id }}_{{ id }}">-->
+                                    <img class="feed-icon1 hidden" onclick="like(this, '{{ i_id }}')"
+                                         src="/static/img/like@3x.png"
+                                         id="{{ feed_id }}_no_heart1">
+                                    {% else %}
+                                    <div class="heart_container hidden" id="{{ feed_id }}_heart1"
+                                         onclick="like(this, '{{ i_id }}')">
+                                        <div class="heart-icon"></div>
+                                    </div>
+                                    <img class="feed-icon1" onclick="like(this, '{{ i_id }}')"
+                                         src="/static/img/like@3x.png"
+                                         id="{{ feed_id }}_no_heart1">
+                                    {% endif %}
+                                    <img class="feed-icon" src="/static/img/comment@3x.png">
+                                </div>
+                                <!-- 좋아요개수 -->
+                                <div id="{{ feed_id }}_like_wrapper1" class="feed-like-wrapper width">
+                                    {% if like != 0 %}
+
+                                    <div id="{{ feed_id }}_{{ id }}someone_like1" class="flex"
+                                         onclick="like_list(this)">
+                                        <div id="{{ feed_id }}_{{ id }}likey1" class="strong flex">좋아요
+                                            <div id="{{ feed_id }}_like_count1">{{ like }}</div>
+                                            개
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <div id="{{ feed_id }}_{{ id }}no_like1" class="flex width_100 magin_top1">
+                                        가장 먼저
+                                        <div id="{{ feed_id }}_like_count1" class="strong margin_left">좋아요</div>
+                                        를 눌러보세요
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <!-- 피드작성시간 -->
+                                <div class="feed-time" style="margin-left: -15%;">
+                                    {{ time }}
+                                </div>
+                                <!-- 댓글부분 -->
+                                <div class="etc_info">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg>
+                                    <input id="{{ feed_id }}comment1" class="comment" placeholder="댓글 달기...">
+                                    <span onclick="comment_write1(`{{ feed_id }}`,`{{ i_id }}`)" class="share">게시</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+
+                    </div>
+
+                </dialog>
+
+        {% endfor %}
+        {% endfor %}
+          <dialog id="update_user_dialog">
+              <div id="update_user_dialog_container">
+              <div>
+                  <div id="update_box">
+                {% if user.img == 'x' or user.img == None %}
+                <img id="update_user_img" class="update_user_img" src="/static/img/12344.gif">
+                {% else %}
+                <img id="update_user_img" class="update_user_img" src="data:image/png;base64, {{ user.img }}">
+                {% endif %}
+                      </div>
+              <div class="choice_btn">
+                    <label for="file1">
+                        컴퓨터에서 선택
+                    </label>
+                </div>
+                <input type="file" id="file1" name="chooseFile" accept="image/gif,image/jpeg,image/png" onchange="loadFile1(this)">
+                <input id="update_user_nick" value="{{ i_nick }}">
+              </div>
+
+              <div id="dialog_btn">
+                  <button onclick="updating1(`{{ i_id }}`)">수정하기</button>
+                  <button onclick='cance_update()'>취소</button>
+              </div>
+            </div>
+
+    </dialog>
+    </div>
+</div>
+{% endblock %}

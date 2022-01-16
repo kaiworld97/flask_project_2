@@ -1,0 +1,383 @@
+/*index.css*/
+
+.comment_img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 3%;
+}
+
+.comment_wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    border-bottom: 0.1px solid #8d8c8c45;
+    padding-bottom: 1%;
+}
+
+.comment_wrapper div:nth-child(2) {
+    flex-basis: 330px;
+    cursor: pointer;
+}
+
+.comment_wrapper div:nth-child(3) {
+    flex-basis: 353px;
+}
+
+
+.dialog_form {
+    padding-top: 4%;
+    padding-bottom: 1%;
+}
+
+.feed-icon1 {
+    margin: 1%;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.comment-write-wrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+.wf_user_profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: darkgray 1px solid;
+    margin-right: 5px;
+}
+
+.comment {
+    border: none;
+    width: 100%;
+    background-color: transparent;
+
+}
+#comment-button {
+    border: none;
+    background-color: transparent;
+    color: cornflowerblue;
+    width: 10vw;
+
+}
+/* heart icon
+/* define variables used for the color of the heart-icon and its size */
+.heart_container {
+    margin: 2%;
+}
+
+:root {
+    --heart-icon-color: #ff6058;
+    --heart-icon-size: 19px;
+}
+
+/** {*/
+/*  box-sizing: border-box;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+/*body {*/
+/*  min-height: 100vh;*/
+/*  width: 100%;*/
+/*}*/
+/* center content in the page */
+/*.container {*/
+/*  display: flex;*/
+/*  height: 100vh;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*!*   include an arbitrary background *!*/
+/*  background: linear-gradient(to top, #f6fbff, #d0ebff);*/
+/*}*/
+/* animate the hearbeat increasing its horizontal size more than its vertical */
+@keyframes heartbeat {
+    to {
+        /*     rotate is included to maintain the rotation introduced briefly after */
+        transform: scaleX(1.4) scaleY(1.3) rotate(-45deg);
+    }
+}
+
+.heart-icon:hover {
+    animation-duration: 0.2s;
+}
+
+/* to create the heart you can use a square div and absolute position two circles through pseudo elements
+
+position these pseudo elements at either end of the square with top/right/bottom/left properties
+*/
+.heart-icon {
+    background-color: var(--heart-icon-color);
+    height: var(--heart-icon-size);
+    width: var(--heart-icon-size);
+    /* rotate the square as to create the core of the heart icon */
+    transform: rotate(-45deg);
+    /*   call the animation on the element, which will affect the pseudo-elements as well */
+    /* animation: heartbeat 1s alternate infinite; */
+    animation: heartbeat 1s alternate;
+    animation-iteration-count: 2;
+}
+
+/* on hover fasten the animation as to give the impression of a faster heartbeat */
+
+.heart-icon:after {
+    /*   by setting the color to inherit the pseudo element takes the color of the connected element */
+    background-color: inherit;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    /* the pseudo elements ought to be positioned halfway through the square; therefore they are offset by half of the chosen width/height */
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    top: 0;
+    left: calc(var(--heart-icon-size) / 2);
+}
+
+.heart-icon:before {
+    content: "";
+    background-color: inherit;
+    border-radius: 50%;
+    position: absolute;
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    top: calc(var(--heart-icon-size) / -2);
+    left: 0;
+}
+
+@media (min-width: 1000px) {
+    #all-container {
+        position: relative;
+        left: -100px;
+    }
+
+    #Auction-container {
+        position: absolute;
+        top: 500px;
+        right: -341px;
+        width: 298px;
+        border: 1px solid #8d8c8c45;
+    }
+
+    #Auction-header {
+        text-align: center;
+        padding: 0% 0% 3% 0%;
+        border: 1px solid #8d8c8c45;
+        margin: 5% 0;
+        border-radius: 5px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        border-bottom: 1px solid #8d8c8c45;
+        z-index: 1;
+        overflow: auto;
+
+    }
+
+    #Auction-header > h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin: auto;
+        user-select: none;
+    }
+
+    #Auction-header > h1 span {
+        display: inline-block;
+        animation: float .2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: none;
+        }
+        33% {
+            transform: translateY(-1px) rotate(-2deg);
+        }
+        66% {
+            transform: translateY(1px) rotate(2deg);
+        }
+    }
+    #Auction-header:hover span {
+        animation: bounce .6s;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translate(0);
+        }
+        25% {
+            transform: rotateX(20deg) translateY(2px) rotate(-3deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(3deg) scale(1.1);
+        }
+    }
+
+    #Auction-header span:nth-child(4n) {
+        color: hsl(50, 75%, 55%);
+        text-shadow: 1px 1px hsl(50, 75%, 45%), 2px 2px hsl(50, 45%, 45%), 3px 3px hsl(50, 45%, 45%), 4px 4px hsl(50, 75%, 45%);
+    }
+
+    #Auction-header span:nth-child(4n-1) {
+        color: hsl(135, 35%, 55%);
+        text-shadow: 1px 1px hsl(135, 35%, 45%), 2px 2px hsl(135, 35%, 45%), 3px 3px hsl(135, 35%, 45%), 4px 4px hsl(135, 35%, 45%);
+    }
+
+    #Auction-header span:nth-child(4n-2) {
+        color: hsl(155, 35%, 60%);
+        text-shadow: 1px 1px hsl(155, 25%, 50%), 2px 2px hsl(155, 25%, 50%), 3px 3px hsl(155, 25%, 50%), 4px 4px hsl(140, 25%, 50%);
+    }
+
+    #Auction-header span:nth-child(4n-3) {
+        color: hsl(30, 65%, 60%);
+        text-shadow: 1px 1px hsl(30, 45%, 50%), 2px 2px hsl(30, 45%, 50%), 3px 3px hsl(30, 45%, 50%), 4px 4px hsl(30, 45%, 50%);
+    }
+
+    #Auction-header > h1 span:nth-child(2) {
+        animation-delay: .05s;
+    }
+
+    #Auction-header > h1 span:nth-child(3) {
+        animation-delay: .1s;
+    }
+
+    #Auction-header > h1 span:nth-child(4) {
+        animation-delay: .15s;
+    }
+
+    #Auction-header > h1 span:nth-child(5) {
+        animation-delay: .2s;
+    }
+
+    #Auction-header > h1 span:nth-child(6) {
+        animation-delay: .25s;
+    }
+
+    #Auction-header > h1 span:nth-child(7) {
+        animation-delay: .3s;
+    }
+
+    #Auction-header > h1 span:nth-child(8) {
+        animation-delay: .35s;
+    }
+
+    #Auction-header > h1 span:nth-child(9) {
+        animation-delay: .4s;
+    }
+
+    #Auction-header > h1 span:nth-child(10) {
+        animation-delay: .45s;
+    }
+
+    #Auction-header > h1 span:nth-child(11) {
+        animation-delay: .5s;
+    }
+
+    #Auction-header > h1 span:nth-child(12) {
+        animation-delay: .55s;
+    }
+
+    #Auction-header > h1 span:nth-child(13) {
+        animation-delay: .6s;
+    }
+
+    #Auction-header > h1 span:nth-child(14) {
+        animation-delay: .65s;
+    }
+
+    #Auction-body-container {
+        /*border-left: 1px solid #8d8c8c45;*/
+        /*border-bottom: 1px solid #8d8c8c45;*/
+        /*border-right: 1px solid #8d8c8c45;*/
+        border: 1px solid #8d8c8c45;
+    }
+
+    #Auction-body {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+    }
+
+    .Auction-body-side {
+        height: 100%;
+        flex-grow: 1;
+
+    }
+
+    .Auction-body-side > img {
+        max-width: 50px;
+        height: auto !important;
+
+
+    }
+
+    #Auction-body-side_space {
+        height: 100%;
+        width: 100%;
+        flex-grow: 8;
+        align-items: start;
+        position: relative;
+
+    }
+
+    #Auction-body-side_space:hover {
+        background-color: greenyellow;
+        color: white;
+    }
+
+    #Auction-body-side_space > img {
+        position: absolute;
+        max-width: 100%;
+        height: auto !important;
+        bottom: 0%;
+        left: 0%;
+
+    }
+
+    #Auction-body-footer {
+
+        display: flex;
+
+        justify-content: space-between;
+        margin: 0 20px 0 20px;
+    }
+
+    #Auction-body-footer > img {
+        max-width: 50px;
+        height: auto !important;
+
+    }
+
+
+}
+
+
+@media (max-width: 1000px) {
+    #Auction-container {
+        display: none
+
+    }
+
+}
+
+/*코멘트수정인풋수정*/
+
+.comment_wrapper input {
+    background-color: transparent;
+    border-bottom-color: #838383;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+}
+
+.comment_wrapper input:focus {
+    outline: none;
+}
+
+.comment_wrapper button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}

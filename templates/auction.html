@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+    <div id="Auction-Page-container">
+        <div id="Auction-Page-main">
+            <div id="Auction-page-header">
+            </div>
+
+
+            <div id="Auction-page-ganggo-container">
+                <div id="btn-create-box">
+                    <button onclick="open_box()" type="button" id="btn-create">광고 등록하기</button>
+
+                </div>
+
+
+                <div class="mypost" id="post-box">
+                    <div class="form-floating">
+                        <input id="url" type="email" class="form-control" placeholder="광고로 쓸 이미지URL을 입력하세요">
+                        <label>이미지 URL입력</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <textarea id="comment" class="form-control_2" placeholder="광고 메시지를 입력하십시오"></textarea>
+                        <label for="floatingTextarea2">광고글 작성</label>
+                    </div>
+                    <div class="mybtns">
+                        <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+                        <button onclick="close_box()" type="button" class="btn-close">닫기</button>
+                    </div>
+                </div>
+
+
+                <div id="Auction-page-ganggo-main">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {#    <input id="check-btn" type="checkbox"/>#}
+    {#    <label for="check-btn">Click Me!</label>#}
+    {#    <ul class="menubars">#}
+    {#        <li>메뉴</li>#}
+    {#        <li>메뉴</li>#}
+    {#        <li>메뉴</li>#}
+    {#        <li>메뉴</li>#}
+    {#    </ul>#}
+    {##}
+    {#    <div>#}
+    {#        <input id="check-btn2" type="checkbox"/>#}
+    {#        <label for="check-btn2">Click Me!</label>#}
+    {#        <ul class="menubars">#}
+    {#            <li>메뉴</li>#}
+    {#            <li>메뉴</li>#}
+    {#            <li>메뉴</li>#}
+    {#            <li>메뉴</li>#}
+    {#        </ul>#}
+    {#    </div>#}
+    {#    <div>#}
+    {#        <input id="check-btn3" type="checkbox"/>#}
+    {#        <label for="check-btn3">Click Me!</label>#}
+    {#        <ul class="menubars">#}
+    {#            <li>메뉴</li>#}
+    {#            <li>메뉴</li>#}
+    {#            <li>메뉴</li>#}
+    {#            <li>메뉴</li>#}
+    {#        </ul>#}
+    {#    </div>#}
+
+
+
+
+{% endblock %}

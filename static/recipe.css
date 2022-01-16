@@ -1,0 +1,169 @@
+#rasipi_header {
+    background-color: white;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid lightgray;
+    padding-top: 80px;
+    z-index: 3;
+}
+
+#rasipi_search_box {
+    color: gray;
+    margin: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 33.3%;
+    height: 34px;
+    border: 1px solid lightgray;
+    background-color: rgba(215, 215, 215, 0.1);
+    border-radius: 3px;
+    padding-left: 15px;
+
+}
+
+#rasipi_search_box > img {
+    width: 4%;
+    /*투명도*/
+    opacity: 0.5;
+    margin-right: 10px;
+}
+
+#rasipi_container {
+    margin: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+    list-style-type: circle;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    padding-top: 20%;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    line-height: 1.42857143;
+}
+
+
+#dialog {
+    position: absolute;
+    top: 0;
+}
+
+/*레시피 li 스타일------------------------------------------------------------------------*/
+.rasipi_li_list {
+    width: 200px;
+    list-style: none;
+    padding: 0;
+    margin: 0 12px 40px 0;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    box-sizing: border-box;
+    text-align: -webkit-match-parent;
+}
+
+.rasipi_img_box {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: block;
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+
+.rasipi_img {
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.rasipi-imgs {
+    max-width: 100%;
+    height: 200px;
+    vertical-align: middle;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    list-style: none;
+}
+
+.rasipi_commant_box {
+    padding: 10px 2px;
+    box-sizing: border-box;
+    display: block;
+    list-style: none;
+
+
+}
+
+.rasipi_commant {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.5;
+    margin: 0 0 6px 0;
+    color: #000;
+    text-align: left;
+    font-size: 15px;
+    box-sizing: border-box;
+    height: 50px;
+
+}
+
+.name_box {
+    color: #999;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    vertical-align: 0;
+    padding: 0 1px 7px 0;
+    font-weight: 300;
+
+}
+
+.name_img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin: 0 4px -2px 0;
+    vertical-align: text-bottom;
+    box-sizing: border-box;
+
+}
+
+.rasipi_poot_box {
+    vertical-align: super;
+    line-height: 1;
+    margin: 0 0 9px 0;
+    box-sizing: border-box;
+    display: block;
+
+}
+
+.heart_box {
+    vertical-align: 1px;
+    box-sizing: border-box;
+
+}
+
+.heart_count {
+    vertical-align: middle;
+    color: #999;
+    font-size: 13px;
+    margin-left: 2px;
+    font-weight: 300;
+    box-sizing: border-box;
+
+}
+
+

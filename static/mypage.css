@@ -1,0 +1,354 @@
+#Mypage-container {
+    width: 100%;
+}
+
+#Mypage-main {
+    max-width: 720px;
+    width: 100%;
+    padding: 7% 0 0;
+    flex-direction: column;
+    display: flex;
+    border-bottom: 1px solid #8d8c8c45;
+}
+
+#Mypage-header {
+    margin-bottom: 4%;
+    display: flex;
+    padding-top: 3%;
+}
+
+#Mypage-profile-box {
+    margin: 0 10%;
+}
+
+
+#Mypage-profile {
+}
+
+.Mypage-profile-photo {
+    border-radius: 50%;
+    width: 15em;
+    height: 15rem;
+}
+
+#Mypage-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#Mypage-section-top {
+    display: flex;
+    align-items: center;
+}
+
+#Mypage-text {
+    font-size: 2rem;
+}
+
+#Mypage-profile-edit-box {
+    margin-left: 3%;
+}
+
+#Mypage-section-middle {
+    margin: 3% 0;
+}
+
+.Mypage-section-middle-text {
+    font-size: 1.4rem;
+    margin-right: 5%;
+    display: flex;
+    float: left;
+    width: 28%;
+}
+
+#Mypage-section-bottom {
+    font-size: 1.5rem;
+}
+
+#Mypage-state-bar {
+    display: flex;
+    border-top: 1px solid rgba(var(--b38, 219, 219, 219), 1);
+    color: #8e8e8e;
+    font-weight: 600;
+    justify-content: center;
+
+}
+
+[role='tab'] {
+    margin-right: 60px;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+[role='tab'].Mypage-grid-box-active {
+    margin-right: 60px;
+    align-items: center;
+    border-top: 1px solid rgba(var(--i1d, 38, 38, 38), 1);
+    cursor: pointer;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(var(--i1d, 38, 38, 38), 1);
+}
+
+[role='tabpanel'] {
+    display: none;
+}
+
+[role='tabpanel'].panel {
+    display: block;
+}
+
+
+.Mypage-aria-label {
+    height: 12px;
+    width: 12px;
+}
+
+.panel {
+
+}
+
+.img-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+}
+
+.margin-right-div {
+    margin-right: 3%;
+}
+
+.mypageimg {
+    width: 18rem;
+    height: 18rem;
+    object-fit: fill;
+}
+
+.mypagediv {
+    width: 18rem;
+    height: 18rem;
+}
+#update_user_dialog{
+    width: 45%;
+    border: 1px solid;
+    border-radius: 3%;
+
+}
+.mypagespan{
+    margin-left: 10%;
+}
+.update_user_img{
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+}
+#update_user_dialog_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#update_user_nick{
+}
+#dialog_btn{
+    margin-top: 5%;
+}
+
+.this-dialog {
+    width: 120%;
+    height: 105%;
+    border: none;
+    border-radius: 2%;
+    overflow: hidden;
+}
+dialog .feed-time {
+    font-size: 0.5rem;
+    width: 30%;
+}
+div#dl_write_part {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 2%;
+}
+.comment_img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 3%;
+}
+dialog .feed-icon {
+    margin-left: 3%;
+    margin-top: 0.1%;
+}
+/* heart icon
+/* define variables used for the color of the heart-icon and its size */
+.heart_container {
+    margin: 2%;
+}
+
+:root {
+    --heart-icon-color: #ff6058;
+    --heart-icon-size: 19px;
+}
+
+/** {*/
+/*  box-sizing: border-box;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+/*body {*/
+/*  min-height: 100vh;*/
+/*  width: 100%;*/
+/*}*/
+/* center content in the page */
+/*.container {*/
+/*  display: flex;*/
+/*  height: 100vh;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*!*   include an arbitrary background *!*/
+/*  background: linear-gradient(to top, #f6fbff, #d0ebff);*/
+/*}*/
+/* animate the hearbeat increasing its horizontal size more than its vertical */
+@keyframes heartbeat {
+    to {
+        /*     rotate is included to maintain the rotation introduced briefly after */
+        transform: scaleX(1.4) scaleY(1.3) rotate(-45deg);
+    }
+}
+
+.heart-icon:hover {
+    animation-duration: 0.2s;
+}
+
+/* to create the heart you can use a square div and absolute position two circles through pseudo elements
+
+position these pseudo elements at either end of the square with top/right/bottom/left properties
+*/
+.heart-icon {
+    background-color: var(--heart-icon-color);
+    height: var(--heart-icon-size);
+    width: var(--heart-icon-size);
+    /* rotate the square as to create the core of the heart icon */
+    transform: rotate(-45deg);
+    /*   call the animation on the element, which will affect the pseudo-elements as well */
+    /* animation: heartbeat 1s alternate infinite; */
+    animation: heartbeat 1s alternate;
+    animation-iteration-count: 2;
+}
+
+/* on hover fasten the animation as to give the impression of a faster heartbeat */
+
+.heart-icon:after {
+    /*   by setting the color to inherit the pseudo element takes the color of the connected element */
+    background-color: inherit;
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    /* the pseudo elements ought to be positioned halfway through the square; therefore they are offset by half of the chosen width/height */
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    top: 0;
+    left: calc(var(--heart-icon-size) / 2);
+}
+
+.heart-icon:before {
+    content: "";
+    background-color: inherit;
+    border-radius: 50%;
+    position: absolute;
+    width: var(--heart-icon-size);
+    height: var(--heart-icon-size);
+    top: calc(var(--heart-icon-size) / -2);
+    left: 0;
+}
+dialog .close_btn {
+    padding-left: 61%;
+    cursor: pointer;
+}
+.comment_wrapper div:nth-child(2) {
+    flex-basis: 30px;
+}
+dialog .comment_wrapper div:nth-child(3) {
+    flex-basis: 0;
+}
+dialog .comment_wrapper div:nth-child(4) {
+    flex-basis: 1px;
+}
+#update_user_dialog button{
+    border: none;
+    background-color: transparent;
+    color: gray;
+}
+.input[type="file" i] {
+    border: 1px;
+}
+#update_user_dialog .choice_btn {
+    width: 130px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: #0094f5;
+    border-radius: 5px;
+    padding: 5px 0 5px 0;
+    margin: auto;
+    margin-top: 8%;
+}
+#file1{
+    visibility: hidden;
+}
+
+@media (max-width: 800px) {
+    .mypageimg {
+        width: 16rem;
+        height: 16rem;
+        object-fit: fill;
+    }
+
+    .mypagediv {
+        width: 16rem;
+        height: 16rem;
+    }
+    .Mypage-profile-photo {
+    width: 13em;
+    height: 13rem;
+}
+}
+
+@media (max-width: 600px) {
+    .Mypage-profile-photo {
+    width: 12em;
+    height: 12rem;
+}
+    .mypageimg {
+        width: 12rem;
+        height: 12rem;
+        object-fit: fill;
+    }
+
+    .mypagediv {
+        width: 12rem;
+        height: 12rem;
+    }
+}

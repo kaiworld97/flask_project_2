@@ -1,0 +1,32 @@
+{% extends "base.html"  %}
+{% block content %}
+    <div id=rasipi_header>
+        <div id="rasipi_search_box">
+            <p>검색</p></div>
+    </div>
+
+    <ul id=rasipi_container>
+
+        <!--   <div class ="rasipi_item"><div class ="rasipi_main"><p>fweffffffffffffffff</p></div></div>-->
+    </ul>
+
+    <!--more 눌렸을때 나타나는 팝업메뉴------------------------------->
+    <dialog id="dialog">
+        <form method="dialog">
+            <p style="color: red"><strong>신고</strong></p>
+            <hr>
+            <p style="color: red"><strong>팔로우 취소</strong></p>
+            <hr>
+            <p>게시물로 이동</p>
+            <hr>
+                  <p>공유 대상...</p>
+                  <hr>
+                  <p>링크 복사</p>
+                  <hr>
+                  <p>퍼가기</p>
+                  <hr>
+                  <button value="cancel">취소</button>
+
+              </form>
+   </dialog>
+{% endblock %}
