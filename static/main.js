@@ -54,6 +54,7 @@ function camera_dialog() {
 
 function close_camera_dialog() {
     document.getElementById('camera_dialog').close()
+    ai_close_btn()
 }
 
 
@@ -177,8 +178,7 @@ function camera_posting(data) {
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    alert(response["msg"])
-                    location.href = '/'
+                    window.location.reload()
                 }
             });
         })
@@ -261,7 +261,7 @@ function writeText() {
     document.querySelector('#_share').style.visibility = "visible";
     document.getElementById('_share').classList.remove('hidden')
     document.getElementById('second_part').classList.remove('hidden')
-        $.ajax({
+    $.ajax({
         type: "GET",
         url: "/result",
         cache: false,
@@ -301,13 +301,10 @@ function posting() {
         contentType: false,
         processData: false,
         success: function (response) {
-            alert(response["msg"])
             window.location.reload()
         }
     });
 }
-
-
 
 
 function dialog_close_btn1() {
@@ -345,10 +342,7 @@ function comment_write1(data, id) {
 function comment_delete(comment_id) {
 
     $.ajax({
-        type: "POST",
-        url: "/comments/delete",
-        data: {'comment_id': comment_id},
-        success: function (response) {
+        type: "POST", url: "/comments/delete", data: {'comment_id': comment_id}, success: function (response) {
             window.location.reload()
         }
     });
@@ -432,5 +426,111 @@ function button_event(comment_id) {
     }
 }
 
+
+// Because only Chrome supports offset-path, feGaussianBlur for now
+// let blue = false
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+if (!isChrome) {
+    document.getElementsByClassName('infinityChrome')[0].style.display = "none";
+    document.getElementsByClassName('infinity')[0].style.display = "block";
+}
+
+function ai_close_btn() {
+    document.getElementById('ai_div').classList.add('visibility_hidden')
+    blue = false
+}
+
+function speak(text) {
+    if (typeof SpeechSynthesisUtterance === "undefined" || typeof window.speechSynthesis === "undefined") {
+        alert("이 브라우저는 음성 합성을 지원하지 않습니다.")
+        return
+    }
+
+    window.speechSynthesis.cancel() // 현재 읽고있다면 초기화
+
+
+    const speechMsg = new SpeechSynthesisUtterance()
+    speechMsg.rate = 1 // 속도: 0.1 ~ 10
+    speechMsg.pitch = 1 // 음높이: 0 ~ 2
+    speechMsg.lang = "ko-KR"
+    speechMsg.text = text
+
+    // SpeechSynthesisUtterance에 저장된 내용을 바탕으로 음성합성 실행
+    window.speechSynthesis.speak(speechMsg)
+}
+
+//     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+//
+//     const recognition = new SpeechRecognition();
+//     recognition.interimResults = true;
+//     recognition.lang = "ko-KR";
+//     recognition.continuous = true;
+//     recognition.maxAlternatives = 10000;
+//
+//
+//     let speechToText = "";
+//
+//     recognition.addEventListener("result", (e) => {
+//         let interimTranscript = "";
+//         for (let i = e.resultIndex, len = e.results.length; i < len; i++) {
+//             let transcript = e.results[i][0].transcript;
+//             console.log('transcript', transcript);
+//
+//             if (e.results[i].isFinal) {
+//                 speechToText += transcript;
+//             } else {
+//                 interimTranscript += transcript;
+//             }
+//         }
+//         console.log('speechToText', speechToText);
+//         console.log('interimTranscript', interimTranscript);
+//         let ai_text = document.querySelector(".ai_text")
+//
+//         ai_text.innerText = speechToText + interimTranscript;
+//
+//         console.log('ing')
+//         if (speechToText == '블루' && blue == false) {
+//             document.getElementById('ai_div').classList.remove('visibility_hidden')
+//             console.log('블루 켜짐!')
+//             speak('안녕하세요')
+//
+//         }
+//     });
+//
+//     recognition.addEventListener("end", (e) => {
+//         // recognition.start();
+//         console.log('bye')
+//         let ai_text = document.querySelector(".ai_text")
+//         console.log(ai_text.innerText)
+//         switch (ai_text.innerText) {
+//             // case "블루":
+//             //   break
+//             case "카메라 켜줘":
+//                 console.log('카메라 켜짐!')
+//                 break
+//             case "마이 페이지 가줘":
+//                 console.log('마이페이지 가짐!')
+//                 break
+//             case "메인 페이지 가줘":
+//                 console.log('메인페이지 가짐!')
+//                 break
+//             case "업로드 해줘":
+//                 console.log('업로드 해짐!')
+//                 break
+//             case "피드 작성 가줘":
+//                 console.log('피드작성 가짐!')
+//                 break
+//         }
+//
+//
+//     });
+//
+//
+// window.onload = function () {
+//     recognition.start();
+//     console.log('hi')
+// }
+// recognition.start();
 
 

@@ -161,7 +161,7 @@
             <div id="btns">
                 <button id="startbutton">사진찍기</button>
                 <button id="restart" class="hidden" onclick="camera_restart()">다시찍기</button>
-                <button onclick="camera_posting('{{ user.id }}')">업로드</button>
+                <button onclick="camera_posting('{{ user.nick }}')">업로드</button>
                 <button onclick="close_camera_dialog()">카메라 끄기</button>
             </div>
             <div id="output" class="hidden">
@@ -174,9 +174,210 @@
 
 
 </div>
+
+<div id="ai_div" class="visibility_hidden">
+    <div id="ai_close_btn" class="ai_close_btn" onclick="ai_close_btn()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+        <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+        </svg>
+    </div>
+    <!-- Google Chrome -->
+<div class="infinityChrome">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div>
+<!-- Safari and others -->
+<div class="infinity">
+    <div>
+        <span></span>
+    </div>
+    <div>
+        <span></span>
+    </div>
+    <div>
+        <span></span>
+    </div>
+</div>
+
+<!-- Stuff -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+    <defs>
+        <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+        </filter>
+    </defs>
+</svg>
+
+<!-- dribbble -->
+<a class="dribbble" href="https://dribbble.com/shots/5557955-Infinity-Loader" target="_blank"><img src="https://cdn.dribbble.com/assets/dribbble-ball-mark-2bd45f09c2fb58dbbfb44766d5d1d07c5a12972d602ef8b32204d28fa3dda554.svg" alt=""></a>
+</div>
+<div>
+<p class="ai_text">안녕하세요</p>
+</div>
+</div>
+
+
 <script src="/static/main.js"></script>
 <script src="/static/{{ html }}.js"></script>
-<script></script>
+<script>
+    let blue = false
+
+    window.SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    // 인스턴스 생성
+    const recognition = new SpeechRecognition();
+
+    // true면 음절을 연속적으로 인식하나 false면 한 음절만 기록함
+    recognition.interimResults = true;
+    // 값이 없으면 HTML의 <html lang="en">을 참고합니다. ko-KR, en-US
+    recognition.lang = "ko-KR";
+    // true means continuous, and false means not continuous (single result each time.)
+    // true면 음성 인식이 안 끝나고 계속 됩니다.
+    recognition.continuous = false;
+    // 숫자가 작을수록 발음대로 적고, 크면 문장의 적합도에 따라 알맞은 단어로 대체합니다.
+    // maxAlternatives가 크면 이상한 단어도 문장에 적합하게 알아서 수정합니다.
+    recognition.maxAlternatives = 10000;
+
+
+    let speechToText = "";
+
+
+    recognition.addEventListener("result", (e) => {
+    let interimTranscript = "";
+    let last = ''
+    for (let i = e.resultIndex, len = e.results.length; i < len; i++) {
+        let transcript = e.results[i][0].transcript;
+        console.log('transcript',transcript);
+        last = transcript
+
+        if (e.results[i].isFinal) {
+        speechToText += transcript;
+        } else {
+        interimTranscript += transcript;
+        }
+    }
+    console.log('speechToText',speechToText);
+    console.log('interimTranscript',interimTranscript);
+    document.querySelector(".ai_text").innerText= last;
+    if (interimTranscript == '블루' && blue == false) {
+    document.getElementById('ai_div').classList.remove('visibility_hidden')
+    console.log('블루 켜짐!')
+    blue = true
+    document.querySelector(".ai_text").innerText= '안녕하세요'
+    setTimeout(() => speak('안녕하세요'), 1000);
+}
+    });
+
+    // 음성인식이 끝나면 자동으로 재시작합니다.
+
+
+    recognition.addEventListener("end", (e) => {
+    // recognition.start();
+    console.log('bye')
+    let ai_text = document.querySelector(".ai_text")
+    console.log(ai_text.innerText)
+    if (blue === true){
+    switch (ai_text.innerText) {
+        // case "블루":
+        //   break
+        case "카메라 켜 줘":
+        case "카메라 켜줘":
+            console.log('카메라 켜짐!')
+            setTimeout(() => speak('카메라를 작동합니다'), 1000);
+            ai_close_btn()
+            camera_dialog()
+            document.getElementById('camera_icon').click();
+            break
+        case "사진 찍어 줘":
+            speak('사진을 촬영합니다')
+            ai_close_btn()
+            document.getElementById('startbutton').click();
+            break
+        case '다시 찍어 줘':
+            speak('다시 촬영합니다')
+            ai_close_btn()
+            camera_restart()
+            break
+        case '사진 올려 줘':
+            speak('게시물을 업로드합니다')
+            ai_close_btn()
+            // setTimeout(() => {console.log("업로드중")}, 5000);
+            camera_posting('{{ user.nick }}')
+            break
+        case "마이 페이지 가줘":
+        case "마이 페이지가 줘":
+            console.log('마이페이지 가짐!')
+            setTimeout(() => speak('마이페이지로 이동합니다'), 1000);
+            ai_close_btn()
+            location.href = '/mypage/{{ user.id }}'
+            break
+        case "메인 페이지 가줘":
+        case "메인 페이지가 줘":
+            console.log('메인페이지 가짐!')
+            setTimeout(() => speak('메인페이지로 이동합니다'), 1000);
+            ai_close_btn()
+            location.href = '/'
+            break
+        case "업로드 해줘":
+        case "업로드 해 줘":
+            console.log('업로드 해짐!')
+            speak('피드를 업로드합니다')
+            // setTimeout(() => {console.log("업로드중")}, 5000);
+            ai_close_btn()
+            posting()
+            break
+        case "게시물작성가 줘":
+        case "게시물작성 가줘":
+        case "게시물 작성 해줘":
+        case "게시물 작성해 줘":
+            console.log('피드작성 가짐!')
+            setTimeout(() => speak('피드 작성 페이지로 이동합니다'), 1000);
+            ai_close_btn()
+            feed_write_dialog()
+            break
+        case '안녕':
+            setTimeout(() => speak('안녕하세요 {{ user.nick }}님'), 1000);
+            break
+        case '누가 만들었어':
+        case '너는 누가 만들었어':
+            setTimeout(() => speak('홍채영님이 만들었습니다'), 1000);
+            break
+        case '너는 누구야':
+        case '누구야':
+            setTimeout(() => speak('저는 블루 입니다'), 1000);
+            break
+        case '블루 사라져':
+        case '사라져':
+            speak('안녕히 계세요')
+            ai_close_btn()
+    }
+    }
+    recognition.start()
+
+});
+
+    // 음성 인식 시작
+    recognition.start();
+
+
+</script>
+
+
 
 </body>
+<!-- Copyright (c) 2022 by Aaron Iker (https://codepen.io/aaroniker/pen/MzoXaZ)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+
+
 </html>

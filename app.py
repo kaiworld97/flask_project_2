@@ -57,9 +57,12 @@ def home():
             user['img'] = image
         rows = []
         info = db.feed
+        # print(list(info.find()))
+        # print('hi')
+        infos = sorted(list(info.find()), key=lambda x: (x['date']), reverse= True)
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
         # print(user[])
-        for x in info.find():
+        for x in infos:
             img_binary = fs.get(x['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
@@ -356,7 +359,8 @@ def mypage(keyword):
         info = db.feed
         # info = db.feed.find({'id': 'carrot_vely'})
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
-        for x in info.find({"id": mypage_user['id']}):
+        infos = sorted(list(info.find({"id": mypage_user['id']})), key=lambda x: (x['date']), reverse=True)
+        for x in infos:
             img_binary = fs.get(x['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
