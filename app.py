@@ -9,7 +9,6 @@ import PIL
 import scipy
 import numpy as np
 import os
-
 import certifi
 import gridfs
 import codecs
@@ -61,7 +60,6 @@ def home():
         # user = db.user.find_one({'id': 'carrot_vely'}, {'_id': False, 'pw': False})
         # print(user[])
         for x in info.find():
-            print(x)
             img_binary = fs.get(x['img'])
             base64_data = codecs.encode(img_binary.read(), 'base64')
             image = base64_data.decode('utf-8')
@@ -168,7 +166,7 @@ def feed_upload():
     date_receive = request.form['date_give']
     content_receive = request.form['content_give']
     id_receive = request.form['id_give']
-    user_id = db.user.find_one({'id': id_receive})['id']
+    user_id = db.user.find_one({'nick': id_receive})['id']
     file = request.files['file_give']
     # gridfs 활용해서 이미지 분할 저장
     fs_image_id = fs.put(file)
@@ -292,7 +290,6 @@ def comment_update_post():
 
 @app.route("/user_update", methods=["POST"])
 def user_update():
-    print(request.form)
     nick_receive = request.form['nick_give']
     id_receive = request.form['id_give']
 
@@ -471,7 +468,6 @@ def sign_in():
 
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     result = db.user.find_one({'id': username_receive, 'pw': pw_hash})
-    print(result)
     if result is not None:
         payload = {
             'id': username_receive,
