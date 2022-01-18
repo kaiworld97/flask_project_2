@@ -2,7 +2,9 @@ function load() {
     window.location.reload()
     window.scrollTo(0, 0)
 }
-
+$(document).ready(function(){
+    insertTag();
+});
 function back() {
     history.back()
 }
@@ -130,6 +132,7 @@ function close_camera_dialog() {
 
     function takepicture() {
         var width = document.getElementById("all-container").offsetWidth;
+        document.getElementById("camera_category_wrapper").classList.add('hidden')
         document.getElementById('video').classList.add('hidden')
         document.getElementById('startbutton').classList.add('hidden')
         document.getElementById('restart').classList.remove('hidden')
@@ -143,6 +146,9 @@ function close_camera_dialog() {
 
             var data = canvas.toDataURL('image/jpeg');
             photo.setAttribute('src', data);
+
+            camera_upload()
+            setTimeout(() => camera_write(), 2000);
         } else {
             clearphoto();
         }
@@ -190,6 +196,110 @@ function camera_restart() {
     document.getElementById('restart').classList.add('hidden')
     document.getElementById('output').classList.add('hidden')
     document.getElementById('camera_feed').classList.add('hidden')
+    document.getElementById("camera_category_wrapper").classList.remove('hidden')
+}
+
+function camera_upload(){
+    let img = $('#photo').attr('src')
+    fetch(img)
+        .then(res => res.blob())
+        .then(blob => {
+
+            const file = new File([blob], 'photo.png', blob)
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+
+            $.ajax({
+                type: "POST",
+                url: '/fileupload',
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                }
+            });
+        })
+}
+function camera_write(){
+    let type = document.getElementById("camera_category-select").value
+    // document.getElementById('').
+    console.log(type)
+    let form_data = new FormData()
+    form_data.append("type_give", type)
+    switch (type) {
+        case 'fruit':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('camera_feed').innerText = response.msg
+                    console.log(response)
+                }
+            });
+            break
+        case 'food':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('camera_feed').innerText = response.msg
+                }
+            });
+            break
+        case 'dessert':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                    document.getElementById('camera_feed').innerText = `#${response.msg}`
+                    console.log(response)
+                }
+            });
+            break
+        case 'flower':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('camera_feed').innerText = `#${response.msg}`
+                    console.log(response)
+                }
+            });
+            break
+        case 'dog':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('camera_feed').innerText = `#${response.msg}`
+                    console.log(response)
+                }
+            });
+            break
+    }
 }
 
 function back_home() {
@@ -234,7 +344,7 @@ function loadFile(input) {
     document.getElementById('uf_one').classList.add('hidden')
     document.getElementById('uf_two').classList.add('hidden')
     document.getElementById('uf_three').classList.add('hidden')
-
+    document.getElementById("category_wrapper").classList.add('hidden')
     let container = document.getElementById("upload_box");
 
     container.style.width = "100%";
@@ -257,21 +367,96 @@ function loadFile(input) {
 }
 
 function writeText() {
+
     document.getElementById('_next').classList.add('hidden')
     document.querySelector('#_share').style.visibility = "visible";
     document.getElementById('_share').classList.remove('hidden')
     document.getElementById('second_part').classList.remove('hidden')
-    $.ajax({
-        type: "GET",
-        url: "/result",
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            document.getElementById('textarea').innerText = response.msg
-            console.log(response)
-        }
-    });
+    let type = document.getElementById("category-select").value
+    // document.getElementById('').
+    console.log(type)
+    let form_data = new FormData()
+    form_data.append("type_give", type)
+    switch (type) {
+        case 'fruit':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('textarea').innerText = `#${response.msg}`
+                    let img_tag = document.createElement("div");
+                    img_tag.setAttribute("class", 'model_result_up')
+                    let tag_wrap = document.getElementById("upload_box");
+                    tag_wrap.appendChild(img_tag)
+                    document.querySelector('.model_result_up').innerText = `#${response.msg}`
+                }
+            });
+            break
+        case 'food':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('textarea').innerText = response.msg
+                }
+            });
+            break
+        case 'dessert':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                document.getElementById('textarea').innerText = `#${response.msg}`
+                let img_tag = document.createElement("div");
+                img_tag.setAttribute("class", 'model_result_up')
+                let tag_wrap = document.getElementById("upload_box");
+                tag_wrap.appendChild(img_tag)
+                document.querySelector('.model_result_up').innerText = response.msg
+                }
+            });
+            break
+        case 'flower':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('textarea').innerText = `#${response.msg}`
+                    console.log(response)
+                }
+            });
+            break
+        case 'dog':
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    document.getElementById('textarea').innerText = `#${response.msg}`
+                    console.log(response)
+                }
+            });
+            break
+    }
+
 }
 
 
@@ -306,6 +491,39 @@ function posting() {
     });
 }
 
+function insertTag() {
+    // 피드본문 리스트화
+    let feed_contents = document.querySelectorAll(".feed-msg")
+    let rows = feed_contents.length
+    console.log(rows)
+
+    for (i = 0; i < rows; i++) {
+        console.log()
+        //각피드 본문텍스트
+        let content_str = document.querySelectorAll(".feed-msg")[i]["innerText"].split(" ")[0].split('\n')[1]
+        //#디저트추출
+        // let dessert_tag = content_str[content_str.length - 1]
+        console.log(content_str)
+        // console.log(i)
+        // console.log(dessert_tag)
+
+
+        let content_tag = document.createElement("div");
+        content_tag.setAttribute("class", "model_result" + i)
+        let url_tag = content_str.slice(1)
+        console.log('주소에붙을태그',url_tag)
+        content_tag.onclick = function () {
+            var link = 'https://www.instagram.com/explore/tags/'+url_tag;
+            window.location.href = link
+            window.open(link);
+            }
+        let tag_wrap = document.querySelectorAll(".feed_photo")[i];
+        tag_wrap.appendChild(content_tag)
+        document.querySelector(".model_result" + i).innerHTML = content_str
+        console.log(content_str)
+
+    }
+}
 
 function dialog_close_btn1() {
     document.getElementById('feed_write_dialog').close()

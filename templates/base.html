@@ -112,6 +112,17 @@
                     </div>
                     <input type="file" id="select_file" name="chooseFile" accept="image/gif,image/jpeg,image/png" onchange="loadFile(this)">
                 </form>
+                <div id="category_wrapper">
+                    <label for="category-select">카테고리</label>
+                        <select name="Category" id="category-select">
+                            <option value="">카테고리를 고르세요</option>
+                            <option value="dog">개</option>
+                            <option value="fruit">과일</option>
+                            <option value="food">인도 음식</option>
+                            <option value="flower">꽃</option>
+                            <option value="dessert">디저트</option>
+                        </select>
+                </div>
             </div>
 
             <!-- 게시글영역추가 -->
@@ -157,6 +168,17 @@
         </div>
         <canvas id="canvas" class="hidden">
         </canvas>
+        <div id="camera_category_wrapper">
+            <label for="camera_category-select">카테고리</label>
+                <select name="Category" id="camera_category-select">
+                    <option value="">카테고리를 고르세요</option>
+                    <option value="dog">개</option>
+                    <option value="fruit">과일</option>
+                    <option value="food">인도 음식</option>
+                    <option value="flower">꽃</option>
+                    <option value="dessert">디저트</option>
+                </select>
+        </div>
         <div id="output-wrapper">
             <div id="btns">
                 <button id="startbutton">사진찍기</button>
@@ -269,7 +291,6 @@
     document.getElementById('ai_div').classList.remove('visibility_hidden')
     console.log('블루 켜짐!')
     blue = true
-    document.querySelector(".ai_text").innerText= '안녕하세요'
     setTimeout(() => speak('안녕하세요'), 1000);
 }
     });
@@ -298,6 +319,7 @@
             speak('사진을 촬영합니다')
             ai_close_btn()
             document.getElementById('startbutton').click();
+
             break
         case '다시 찍어 줘':
             speak('다시 촬영합니다')
@@ -309,6 +331,11 @@
             ai_close_btn()
             // setTimeout(() => {console.log("업로드중")}, 5000);
             camera_posting('{{ user.nick }}')
+            break
+        case '카메라 꺼 줘':
+            speak('카메라를 종료합니다')
+            ai_close_btn()
+            close_camera_dialog()
             break
         case "마이 페이지 가줘":
         case "마이 페이지가 줘":
@@ -337,9 +364,34 @@
         case "게시물 작성 해줘":
         case "게시물 작성해 줘":
             console.log('피드작성 가짐!')
-            setTimeout(() => speak('피드 작성 페이지로 이동합니다'), 1000);
+            speak('피드 작성 페이지로 이동합니다')
             ai_close_btn()
             feed_write_dialog()
+            break
+        case '카테고리 과일':
+            document.getElementById("category-select").value = 'fruit'
+            document.getElementById("camera_category-select").value = 'fruit'
+            ai_close_btn()
+            break
+        case '카테고리 개':
+            document.getElementById("category-select").value = 'dog'
+            document.getElementById("camera_category-select").value = 'dog'
+            ai_close_btn()
+            break
+        case '카테고리 인도음식':
+            document.getElementById("category-select").value = 'food'
+            document.getElementById("camera_category-select").value = 'food'
+            ai_close_btn()
+            break
+        case '카테고리 꽃':
+            document.getElementById("category-select").value = 'flower'
+            document.getElementById("camera_category-select").value = 'flower'
+            ai_close_btn()
+            break
+        case '카테고리 디저트':
+            document.getElementById("category-select").value = 'dessert'
+            document.getElementById("camera_category-select").value = 'dessert'
+            ai_close_btn()
             break
         case '안녕':
             setTimeout(() => speak('안녕하세요 {{ user.nick }}님'), 1000);

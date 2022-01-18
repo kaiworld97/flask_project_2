@@ -1319,3 +1319,43 @@ body .dribbble img {
 .visibility_hidden{
     visibility: hidden;
 }
+
+#camera_category_wrapper{
+    position: absolute;
+    bottom: 20%;
+    left: 40%;
+}
+
+.img{
+    position: relative;
+}
+.model_result_up {
+    position: absolute;
+    font-size: 17px;
+    background-color: #444444;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+    border: none;
+}
+
+
+.feed_photo div {
+    position: absolute;
+    font-size: 17px;
+    background-color: #444444;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+    border: none;
+    cursor: pointer;
+    margin-left: 42%;
+    margin-top: -52%;
+}
+
+
+
+.feed_photo img {
+    width: 720px;
+    height: 540px;
+}
