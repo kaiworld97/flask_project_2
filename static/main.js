@@ -238,7 +238,7 @@ function camera_write(){
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    document.getElementById('camera_feed').innerText = response.msg
+                    document.getElementById('camera_feed').innerText = `#${response.msg}`
                     console.log(response)
                 }
             });
@@ -252,7 +252,7 @@ function camera_write(){
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    document.getElementById('camera_feed').innerText = response.msg
+                    document.getElementById('camera_feed').innerText = `#${response.msg}`
                 }
             });
             break
@@ -405,7 +405,7 @@ function writeText() {
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    document.getElementById('textarea').innerText = response.msg
+                    document.getElementById('textarea').innerText = `#${response.msg}`
                 }
             });
             break

@@ -369,29 +369,38 @@
             feed_write_dialog()
             break
         case '카테고리 과일':
+            speak('카테고리를 과일로 변경합니다')
             document.getElementById("category-select").value = 'fruit'
             document.getElementById("camera_category-select").value = 'fruit'
             ai_close_btn()
             break
         case '카테고리 개':
+            speak('카테고리를 개로 변경합니다')
             document.getElementById("category-select").value = 'dog'
             document.getElementById("camera_category-select").value = 'dog'
             ai_close_btn()
             break
         case '카테고리 인도음식':
+            speak('카테고리를 인도음식으로 변경합니다')
             document.getElementById("category-select").value = 'food'
             document.getElementById("camera_category-select").value = 'food'
             ai_close_btn()
             break
         case '카테고리 꽃':
+            speak('카테고리를 꽃으로 변경합니다')
             document.getElementById("category-select").value = 'flower'
             document.getElementById("camera_category-select").value = 'flower'
             ai_close_btn()
             break
         case '카테고리 디저트':
+            speak('카테고리를 디저트로 변경합니다')
             document.getElementById("category-select").value = 'dessert'
             document.getElementById("camera_category-select").value = 'dessert'
             ai_close_btn()
+            break
+        case '새로고침 해 줘':
+            speak('페이지를 새로고침합니다')
+            window.location.reload()
             break
         case '안녕':
             setTimeout(() => speak('안녕하세요 {{ user.nick }}님'), 1000);

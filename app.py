@@ -49,36 +49,39 @@ fruits = ['사과', '아보카도', '바나나', '블루베리', '체리', '용�
           '레몬', '귤', '망고', '오렌지', '배', '딸기', '토마토', '수박']
 
 foods = ['buger', 'naan', 'chai', 'chapati', 'chole+bhature', 'dal+makhani', 'dhokla', 'fried+rice', 'idli', 'jalebi',
-          'kaathi+rolls', 'kadai+paneer', 'kulfi', 'masala+dosa', 'mamos', 'paani+puri', 'pakode', 'pav+bhaji','pizza','samosa']
-dogs = ['Chihuahua', 'Japanese_spaniel', 'Maltese_dog', 'Pekinese', 'Shih-Tzu', 'Blenheim_spaniel', 'papillon', 'toy_terrier', 'Rhodesian_ridgeback', 'Afghan_hound', 'basset', 'beagle', 'bluetick', 'bloodhound']
+         'kaathi+rolls', 'kadai+paneer', 'kulfi', 'masala+dosa', 'mamos', 'paani+puri', 'pakode', 'pav+bhaji', 'pizza',
+         'samosa']
+dogs = ['Chihuahua', 'Japanese_spaniel', 'Maltese_dog', 'Pekinese', 'Shih-Tzu', 'Blenheim_spaniel', 'papillon',
+        'toy_terrier', 'Rhodesian_ridgeback', 'Afghan_hound', 'basset', 'beagle', 'bluetick', 'bloodhound']
 flowers = ['블루벨 블루벨의 꽃말은...겸손, 감사, 영원한 사랑', '미나리아재비의 꽃말은...천진난만',
            "관동화 관동화...한 겨울을 지내고 피는 꽃...", '카우슬립 앵초의 꽃말은...젊은 날의 슬픔...', '크로커스의 꽃말은...청춘의 기쁨',
            '수선화 수선화의 꽃말은...고결, 신비, 자기사랑', '데이지의 꽃말은...희망, 평화', '민들레의 꽃말은...감사하는 마음, 행복',
-           '프리틸라리아 멜리그리스 프리틸라리아 멜리그리스의 꽃말은...위엄, 자존심, 권력','붓꽃의 꽃말은...좋은 소식, 사랑의 메시지',
+           '프리틸라리아 멜리그리스 프리틸라리아 멜리그리스의 꽃말은...위엄, 자존심, 권력', '붓꽃의 꽃말은...좋은 소식, 사랑의 메시지',
            '은방울꽃 은방울꽃의 꽃말은...틀림없이 행복해 집니다.', '팬지의 꽃말은...나를 생각해 주세요.',
            '해바라기 해바라기의 꽃말은...당신만을 사랑합니다.', '참나리의 꽃말은...순결, 깨끗한 마음', '노란 튤립의 꽃말은...이루어질 수 없는 사랑',
            '바람꽃 의 꽃말은...당신만이 볼 수 있어요', '설강화의 꽃말은...희망, 위안']
 desserts = ['apple_pie', 'baby_back_ribs', 'baklava', 'beef_carpaccio', 'beef_tartare', 'beet_salad',
-                     'beignets',
-                     'bibimbap', 'bread_pudding', 'breakfast_burrito', 'bruschetta', 'caesar_salad', 'cannoli',
-                     'caprese_salad', 'carrot_cake', 'ceviche', 'cheese_plate', 'cheesecake', 'chicken_curry',
-                     'chicken_quesadilla', 'chicken_wings', 'chocolate_cake', 'chocolate_mousse', 'churros',
-                     'clam_chowder',
-                     'club_sandwich', 'crab_cakes', 'creme_brulee', 'croque_madame', 'cup_cakes', 'deviled_eggs',
-                     'donuts',
-                     'dumplings', 'edamame', 'eggs_benedict', 'escargots', 'falafel', 'filet_mignon', 'fish_and_chips',
-                     'foie_gras', 'french_fries', 'french_onion_soup', 'french_toast', 'fried_calamari', 'fried_rice',
-                     'frozen_yogurt', 'garlic_bread', 'gnocchi', 'greek_salad', 'grilled_cheese_sandwich',
-                     'grilled_salmon',
-                     'guacamole', 'gyoza', 'hamburger', 'hot_and_sour_soup', 'hot_dog', 'huevos_rancheros', 'hummus',
-                     'ice_cream', 'lasagna', 'lobster_bisque', 'lobster_roll_sandwich', 'macaroni_and_cheese',
-                     'macarons',
-                     'miso_soup', 'mussels', 'nachos', 'omelette', 'onion_rings', 'oysters', 'pad_thai', 'paella',
-                     'pancakes', 'panna_cotta', 'peking_duck', 'pho', 'pizza', 'pork_chop', 'poutine', 'prime_rib',
-                     'pulled_pork_sandwich', 'ramen', 'ravioli', 'red_velvet_cake', 'risotto', 'samosa', 'sashimi',
-                     'scallops', 'seaweed_salad', 'shrimp_and_grits', 'spaghetti_bolognese', 'spaghetti_carbonara',
-                     'spring_rolls', 'steak', 'strawberry_shortcake', 'sushi', 'tacos', 'takoyaki', 'tiramisu',
-                     'tuna_tartare', 'waffles']
+            'beignets',
+            'bibimbap', 'bread_pudding', 'breakfast_burrito', 'bruschetta', 'caesar_salad', 'cannoli',
+            'caprese_salad', 'carrot_cake', 'ceviche', 'cheese_plate', 'cheesecake', 'chicken_curry',
+            'chicken_quesadilla', 'chicken_wings', 'chocolate_cake', 'chocolate_mousse', 'churros',
+            'clam_chowder',
+            'club_sandwich', 'crab_cakes', 'creme_brulee', 'croque_madame', 'cup_cakes', 'deviled_eggs',
+            'donuts',
+            'dumplings', 'edamame', 'eggs_benedict', 'escargots', 'falafel', 'filet_mignon', 'fish_and_chips',
+            'foie_gras', 'french_fries', 'french_onion_soup', 'french_toast', 'fried_calamari', 'fried_rice',
+            'frozen_yogurt', 'garlic_bread', 'gnocchi', 'greek_salad', 'grilled_cheese_sandwich',
+            'grilled_salmon',
+            'guacamole', 'gyoza', 'hamburger', 'hot_and_sour_soup', 'hot_dog', 'huevos_rancheros', 'hummus',
+            'ice_cream', 'lasagna', 'lobster_bisque', 'lobster_roll_sandwich', 'macaroni_and_cheese',
+            'macarons',
+            'miso_soup', 'mussels', 'nachos', 'omelette', 'onion_rings', 'oysters', 'pad_thai', 'paella',
+            'pancakes', 'panna_cotta', 'peking_duck', 'pho', 'pizza', 'pork_chop', 'poutine', 'prime_rib',
+            'pulled_pork_sandwich', 'ramen', 'ravioli', 'red_velvet_cake', 'risotto', 'samosa', 'sashimi',
+            'scallops', 'seaweed_salad', 'shrimp_and_grits', 'spaghetti_bolognese', 'spaghetti_carbonara',
+            'spring_rolls', 'steak', 'strawberry_shortcake', 'sushi', 'tacos', 'takoyaki', 'tiramisu',
+            'tuna_tartare', 'waffles']
+
 
 @app.route('/')
 def home():
@@ -261,7 +264,7 @@ def result():
         except:
             food = '이건'
             food_info = '음식이 아님@'
-        return jsonify({'msg':f'{food}: {food_info}'})
+        return jsonify({'msg': f'{food}: {food_info}'})
 
     elif type_receive == 'dessert':
         pred = model_dessert.predict(test_generator)
@@ -293,19 +296,19 @@ def result():
             dog = '이건 개가 아닙니다!'
         return jsonify({'msg': dog})
 
+
 def auto_feed_write(data):
-    temp_url= 'https://terms.naver.com/search.naver?query=123&searchType=text&dicType=&subject='
-    temp_url1=temp_url.split('123')[0]
-    temp_url2=temp_url.split('123')[1]
-    url=(f'{temp_url1}{data}{temp_url2}')
+    temp_url = 'https://terms.naver.com/search.naver?query=123&searchType=text&dicType=&subject='
+    temp_url1 = temp_url.split('123')[0]
+    temp_url2 = temp_url.split('123')[1]
+    url = (f'{temp_url1}{data}{temp_url2}')
     print(url)
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
     info = soup.select_one('#content > div:nth-child(3) > ul > li:nth-child(1) > div.info_area > p').text
     return info
-
-
 
 
 @app.route('/feed_like', methods=['POST'])
@@ -557,9 +560,9 @@ def mypage(keyword):
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+
 @app.route('/api/insta', methods=['POST'])
 def api_insta():
-
     data_receive = request.form['data']
 
     headers = {
