@@ -1,10 +1,10 @@
-sa
+[![flask_project_2](http://img.youtube.com/vi/B5rqLFaaIaI/0.jpg)](https://www.youtube.com/embed/B5rqLFaaIaI) 
 
-프로젝트 제목
+# 프로젝트 제목
 
 인스타 + AI
 
-프로젝트 설명
+# 프로젝트 설명
 
 인스타 + AI
 
