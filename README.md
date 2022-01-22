@@ -1,5 +1,9 @@
+ <div align="center">
+
 [![flask_project_2](http://img.youtube.com/vi/B5rqLFaaIaI/0.jpg)](https://www.youtube.com/embed/B5rqLFaaIaI) 
 
+   </div>
+     
 # 프로젝트 제목
 
 인스타 + AI
